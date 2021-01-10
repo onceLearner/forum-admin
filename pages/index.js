@@ -1,65 +1,39 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React, { useState, useHook } from "react"
+import axios from "axios"
+
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+
+const loginHandle = async (username, password) => {
+  const remote = "https://webrtc-back1.herokuapp.com/user/one_user"
+  let result;
+  axios.post(remote, {
+    username: username,
+    password: password,
+    role: "admin"
+  }).then(res => console.log(res.data))
+    .catch(e => console.error(e))
+
+}
+
 
 export default function Home() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="bg-gradient-to-r from-gray-900 to-gray-800 h-screen w-screen p-10 flex flex-col items-center">
+      <div className="font-hairline text-sm text-gray-200 p-10 ">
+        Forum Administration
+      </div>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <div className="border border-gray-600 shadow-sm md:w-1/3 w-full  flex flex-col  items-center space-y-8 p-8 bg-gradient-to-r from-gray-900 to-gray-800">
+        <AccountCircleIcon className="text-white" />
+        <input type="text" className="border p-3  w-full  " onChange={evt => setUsername(evt.target.value)} placeholder="Username" />
+        <input type="password" className="border p-3 w-full " onChange={evt => setPassword(evt.target.value)} placeholder="password" />
+        <button onClick={() => loginHandle(username, password)} className="border font-extralight hover:border-red-500 hover:text-red-500  text-white px-8 py-2"> Login </button>
+      </div>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   )
 }
