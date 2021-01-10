@@ -2,16 +2,26 @@ import React, { useState, useHook } from "react"
 import axios from "axios"
 
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 
-const loginHandle = async (username, password) => {
+
+
+
+const loginHandle = async (username, password, setLoading, setMessgae) => {
+  setLoading(true)
   const remote = "https://webrtc-back1.herokuapp.com/user/one_user"
-  let result;
+  let result = false;
   axios.post(remote, {
     username: username,
     password: password,
     role: "admin"
-  }).then(res => console.log(res.data))
+  }).then(res => {
+    setLoading(false);
+    result = res.data
+    setMessgae(result)
+  })
     .catch(e => console.error(e))
+
 
 }
 
@@ -19,17 +29,40 @@ const loginHandle = async (username, password) => {
 export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState(null)
+
+  const LaodingIcon = <AutorenewIcon className="animate-spin" />
   return (
     <div className="bg-gradient-to-r from-gray-900 to-gray-800 h-screen w-screen p-10 flex flex-col items-center">
       <div className="font-hairline text-sm text-gray-200 p-10 ">
-        Forum Administration
+        <p className="text-center font-light  p-4 text-sm">
+          Admin Forum
+       </p>
+        <div className="border border-gray-600 opacity-80 px-5 ">
+          {
+            message !== null ?
+              (
+                message ?
+                  <p className="text-green-400 p-3  text-lg"> Welcome !</p> :
+                  <p className="text-red-400 p-3 text-lg">  Wrong Infos! Try again </p>
+              )
+              :
+              ``
+          }
+        </div>
       </div>
 
       <div className="border border-gray-600 shadow-sm md:w-1/3 w-full  flex flex-col  items-center space-y-8 p-8 bg-gradient-to-r from-gray-900 to-gray-800">
         <AccountCircleIcon className="text-white" />
         <input type="text" className="border p-3  w-full  " onChange={evt => setUsername(evt.target.value)} placeholder="Username" />
         <input type="password" className="border p-3 w-full " onChange={evt => setPassword(evt.target.value)} placeholder="password" />
-        <button onClick={() => loginHandle(username, password)} className="border font-extralight hover:border-red-500 hover:text-red-500  text-white px-8 py-2"> Login </button>
+        <button onClick={() => loginHandle(username, password, setLoading, setMessage)} className="border font-extralight hover:border-red-500 hover:text-red-500  text-white px-8 py-2">
+
+          {loading ? LaodingIcon : `Login`}
+
+
+        </button>
       </div>
 
 
