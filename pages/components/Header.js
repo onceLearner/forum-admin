@@ -8,7 +8,7 @@ const date = new Date().toLocaleString('en-GB', { weekday: "long", year: "numeri
 
 const Header = () => {
     return (
-        <div className="flex border-b border-gray-700 shadow-2xl  justify-between    p-3 px-10  ">
+        <div className="flex border-b border-gray-700 shadow-2xl  justify-between    p-3 px-10  " style={{ fontFamily: "Questrial" }}>
             <div className="text-gray-100 opacity-50">
                 {date}
             </div>

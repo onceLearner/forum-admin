@@ -1,9 +1,9 @@
 import React from 'react'
 import Header from './Header'
 
-const Container = () => {
+const ContainerEntr = () => {
     return (
-        <div className="flex flex-col w-screen " style={{ fontFamily: "Questrial" }}>
+        <div className="flex flex-col w-screen ">
             <Header />
             <div className="">
 
@@ -13,4 +13,4 @@ const Container = () => {
     )
 }
 
-export default Container
+export default ContainerEntr

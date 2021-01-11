@@ -1,12 +1,13 @@
 import React from 'react'
-import Container from './components/Container'
+import ContainerEntr from './components/ContainerEntr'
 import Sidebar from './components/Sidebar'
 
-const Home = () => {
+
+const Entreprise = () => {
     return (
         <div className="flex   bg-gradient-to-br from-gray-900 to-gray-800 ">
-            <Sidebar id={0} />
-            <Container />
+            <Sidebar id={3} />
+            <ContainerEntr />
 
 
 
@@ -14,4 +15,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Entreprise
