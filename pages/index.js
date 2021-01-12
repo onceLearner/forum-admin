@@ -40,7 +40,7 @@ export default function Home() {
 
   const LaodingIcon = <AutorenewIcon className="animate-spin" />
   return (
-    <div className="bg-gradient-to-br from-gray-800 to-gray-900 h-screen w-screen p-10 flex flex-col items-center">
+    <div className="bg-gradient-to-tr from-gray-800 to-gray-900 h-screen w-screen p-10 flex flex-col items-center">
       <div className="font-hairline text-sm text-gray-200 p-10 ">
         <p className="text-center font-light  p-4 text-sm">
           Admin Forum
@@ -60,10 +60,10 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="border border-gray-600 shadow-sm md:w-1/3 w-full  flex flex-col  items-center space-y-8 p-8 bg-gradient-to-r from-gray-900 to-gray-800">
+      <div className="rounded-xl shadow-sm md:w-2/3 h-2/3 justify-center  w-full  flex flex-col  items-center space-y-8 p-8 bg-gradient-to-r from-gray-900 to-gray-800">
         <AccountCircleIcon className="text-white" />
-        <input type="text" className="border p-3  w-full   " onChange={evt => setUsername(evt.target.value)} placeholder="Username" />
-        <input type="password" className="border p-3 w-full " onChange={evt => setPassword(evt.target.value)} placeholder="password" />
+        <input type="text" className="border p-2  md:w-1/3 rounded-xl   " onChange={evt => setUsername(evt.target.value)} placeholder="Username" />
+        <input type="password" className="border p-2 md:w-1/3  rounded-xl " onChange={evt => setPassword(evt.target.value)} placeholder="password" />
         <button onClick={() => loginHandle(username, password, setLoading, setMessage)} className="border font-extralight hover:border-red-500 hover:text-red-500  text-white px-8 py-2">
 
           {loading ? LaodingIcon : `Login`}

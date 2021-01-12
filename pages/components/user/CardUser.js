@@ -38,7 +38,7 @@ const CardUser = (props) => {
 
             <div className="flex flex-wrap gap-4 items-center opacity-70">
                 <p className="text-gray-400 text-sm">prenom:</p>
-                <p className="text-gray-200  ">{props.user.name}</p>
+                <p className="text-gray-200  ">{props.user.prenom}</p>
             </div>
 
             <div className="flex flex-wrap gap-4 items-center opacity-70">

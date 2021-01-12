@@ -43,7 +43,7 @@ const ContainerUser = () => {
             <Header />
             <div className="w-full p-10" >
                 <div className="flex items-center justify-between border-gray-500 p-7  ">
-                    <p></p>
+                    <p className="text-3xl  text-gray-300" style={{ fontFamily: "Questrial" }}> Gestion des utilisateurs</p>
                     <input type="text" className="bg-gray-800 p-3 text-white " placeholder="Search"
                         onChange={(evt) => setSearchValue(evt.target.value)}
                     />
