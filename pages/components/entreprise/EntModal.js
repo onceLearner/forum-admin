@@ -6,11 +6,10 @@ import TrackChangesIcon from '@material-ui/icons/TrackChanges';
 
 
 
-const handleAdd = (Job, tags, setLoading, setRes) => {
+const handleAdd = (Entreprise, setLoading, setRes) => {
     setLoading(true);
 
-    tags = tags.trim().split(" ")
-    axios.post("https://webrtc-back1.herokuapp.com/job/add", Job)
+    axios.post("https://webrtc-back1.herokuapp.com/entreprise/add", Entreprise)
         .then(res => { setLoading(false); setRes(res.data) })
         .catch(exc => console.error(exc))
 
@@ -19,15 +18,14 @@ const handleAdd = (Job, tags, setLoading, setRes) => {
 
 
 
-const JobModal = (props) => {
+const EntModal = (props) => {
 
-    const [Job, setJob] = useState(
-        { id_job: "", id_entreprise: "", title_job: "", description_job: "", tags: [] }
+    const [Entreprise, setEntreprise] = useState(
+        { id_entreprise: "", username_admin: "", title_entreprise: "", domaine: "", code_conf: "", interests: "", description: "" }
     )
-    const [tags, setTags] = useState("")
+
     const [loading, setLoading] = useState(false)
     const [res, setRes] = useState(null)
-    const [modal, setMdal] = useState(false)
 
 
 
@@ -45,22 +43,22 @@ const JobModal = (props) => {
                 </p>
                 </div>
                 <div className="flex justify-center text-lg text-gray-400 " style={{ fontFamily: "Questrial" }}>
-                    <p>nouveau Job</p>
+                    <p>nouvelle Entreprise</p>
 
                 </div>
                 <div className="flex flex-wrap gap-5 justify-between items-center opacity-70  " >
-                    <p className="text-gray-200 font-mono">id_job:</p>
+                    <p className="text-gray-200 font-mono">id_entreprise:</p>
                     <input type="text" className="bg-gray-800 p-3 text-white " placeholder="..."
-                        onChange={(evt) => setJob({ ...Job, id_job: evt.target.value })}
+                        onChange={(evt) => setEntreprise({ ...Entreprise, id_entreprise: evt.target.value })}
                     />
 
 
 
                 </div>
                 <div className="flex flex-wrap gap-4 items-center opacity-70">
-                    <p className="text-gray-200 font-mono">id entrerprise:</p>
+                    <p className="text-gray-200 font-mono">username admin:</p>
                     <input type="text" className="bg-gray-800 p-3 text-white " placeholder="..."
-                        onChange={(evt) => setJob({ ...Job, id_entreprise: evt.target.value })}
+                        onChange={(evt) => setEntreprise({ ...Entreprise, username_admin: evt.target.value })}
                     />
 
                 </div>
@@ -68,30 +66,50 @@ const JobModal = (props) => {
                 <div className="flex flex-wrap gap-4 items-center opacity-70 justify-between">
                     <p className="text-gray-200 font-mono">titre:</p>
                     <input type="text" className="bg-gray-800 p-3 text-white " placeholder="..."
-                        onChange={(evt) => setJob({ ...Job, title_job: evt.target.value })}
+                        onChange={(evt) => setEntreprise({ ...Entreprise, title_entreprise: evt.target.value })}
+                    />
+
+                </div>
+
+                <div className="flex flex-wrap gap-4 items-center opacity-70 justify-between">
+                    <p className="text-gray-200 font-mono">domaine:</p>
+                    <input type="text" className="bg-gray-800 p-3 text-white " placeholder="..."
+                        onChange={(evt) => setEntreprise({ ...Entreprise, domaine: evt.target.value })}
+                    />
+
+                </div>
+
+                <div className="flex flex-wrap gap-4 items-center opacity-70 justify-between">
+                    <p className="text-gray-200 font-mono">code cong:</p>
+                    <input type="text" className="bg-gray-800 p-3 text-white " placeholder="pfe offre "
+                        onChange={(evt) => setEntreprise({ ...Entreprise, code_conf: evt.target.value })}
+                    />
+
+                </div>
+
+                <div className="flex flex-wrap gap-4 items-center opacity-70 justify-between">
+                    <p className="text-gray-200 font-mono">interests:</p>
+                    <input type="text" className="bg-gray-800 p-3 text-white " placeholder="pfe offre "
+                        onChange={(evt) => setEntreprise({ ...Entreprise, interests: evt.target.value })}
                     />
 
                 </div>
 
                 <div className="flex flex-wrap gap-4 items-center opacity-70 justify-between">
                     <p className="text-gray-200 font-mono">description:</p>
-                    <input type="text" className="bg-gray-800 p-3 text-white " placeholder="..."
-                        onChange={(evt) => setJob({ ...Job, description_job: evt.target.value })}
-                    />
-
-                </div>
-
-                <div className="flex flex-wrap gap-4 items-center opacity-70 justify-between">
-                    <p className="text-gray-200 font-mono">tags:</p>
                     <input type="text" className="bg-gray-800 p-3 text-white " placeholder="pfe offre "
-                        onChange={(evt) => setTags(evt.target.value)}
+                        onChange={(evt) => setEntreprise({ ...Entreprise, description: evt.target.value })}
                     />
 
                 </div>
+
+
+
+
                 <div className="flex flex-col items-center justify-center">
                     <button
                         className={` flex items-center  space-x-4 border-2 focus:outline-none  border-gray-700  p-2 px-6 text-lg font-semibold  rounded-3xl  mb-8 text-gray-500 hover:text-white hover:bg-blue-500 `}
-                        onClick={() => { handleAdd(Job, tags, setLoading, setRes) }}>
+                        onClick={() => { handleAdd(Entreprise, setLoading, setRes) }}>
                         <p>ajouter </p>
                         {
                             loading && <TrackChangesIcon className={`text-gray-100 animate-spin `} />
@@ -113,4 +131,4 @@ const JobModal = (props) => {
     )
 }
 
-export default JobModal
+export default EntModal

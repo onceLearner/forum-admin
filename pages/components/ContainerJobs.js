@@ -8,9 +8,9 @@ import Header from './Header'
 import CardJob from './job/CardJob';
 import JobModal from './job/JobModal';
 
-const ContainerJobs = () => {
+const ContainerJobs = ({ jobs }) => {
     const [list, setList] = useState([])
-    const [listInitial, setListInitial] = useState([])
+    const [listInitial, setListInitial] = useState(jobs)
     const [loading, setLoading] = useState(true)
     const [SearchValue, setSearchValue] = useState("");
     const [modal, setModal] = useState(false);
@@ -76,6 +76,19 @@ const ContainerJobs = () => {
         </div>
     )
 }
+
+export async function getStaticProps() {
+    const res = await fetch("https://webrtc-back1.herokuapp.com/job/jobs")
+    const jobs = await res.json()
+
+    return {
+        props: {
+            jobs,
+        },
+        revalidate: 1,
+    }
+}
+
 
 export default ContainerJobs
 

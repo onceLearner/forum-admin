@@ -5,11 +5,12 @@ import SearchIcon from '@material-ui/icons/Search';
 import Header from './Header'
 import CardEnt from './entreprise/CardEnt';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import EntModal from './entreprise/EntModal';
 
 
-const ContainerEntr = () => {
+const ContainerEntr = ({ entreprises }) => {
     const [list, setList] = useState([])
-    const [listInitial, setListInitial] = useState([])
+    const [listInitial, setListInitial] = useState(entreprises)
     const [loading, setLoading] = useState(true)
     const [SearchValue, setSearchValue] = useState("");
     const [modal, setModal] = useState(false)
@@ -55,6 +56,7 @@ const ContainerEntr = () => {
 
 
                 </div>
+                {modal && <EntModal modal={setModal} />}
 
                 <div className={!loading ? `hidden` : ` flex items-center justify-center h-screen `}>
                     <TrackChangesIcon style={{ fontSize: "60px" }} className=" text-gray-200  animate-spin" />
@@ -74,6 +76,18 @@ const ContainerEntr = () => {
         </div>
     )
 }
+export async function getStaticProps() {
+    const res = await fetch("https://webrtc-back1.herokuapp.com/entreprise/entreprises")
+    const entreprises = await res.json()
+
+    return {
+        props: {
+            entreprises,
+        },
+        revalidate: 1,
+    }
+}
+
 
 export default ContainerEntr
 
