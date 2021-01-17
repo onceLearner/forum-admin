@@ -21,7 +21,7 @@ const CardJob = (props) => {
         <div className="flex flex-col   border border-gray-600 shadow-xl hover:shadow-2xl p-4  md:w-80 flex-wrap rounded-lg space-y-4 bg-gradient-to-tr from-gray-800 to-gray-700  transform cursor-pointer hover:scale-105 transition delay-50  " style={{ fontFamily: "Questrial" }} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)} >
             <div className="flex gap-8 items-center justify-center p-3">
                 <Avatar className="" >{props.job.id_job.slice(0, 1)}</Avatar>
-                <div className={isHover ? `text-red-500 hover:text-white` : ` hidden`} onClick={() => deleteJob(props.job.id_job)} >
+                <div className={isHover ? `text-red-500 hover:text-red-400` : ` hidden`} onClick={() => deleteJob(props.job.id_job)} >
                     <DeleteIcon /> delete
                 </div>
             </div>

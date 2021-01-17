@@ -1,4 +1,4 @@
-import React, { useState, useHook } from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import axios from "axios"
 
@@ -38,6 +38,9 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState(null)
 
+
+
+
   const LaodingIcon = <AutorenewIcon className="animate-spin" />
   return (
     <div className="bg-gradient-to-tr from-gray-800 to-gray-900 h-screen w-screen p-10 flex flex-col items-center">
@@ -60,7 +63,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="rounded-xl shadow-sm md:w-2/3 h-2/3 justify-center  w-full  flex flex-col  items-center space-y-8 p-8 bg-gradient-to-r from-gray-900 to-gray-800">
+      <div className="rounded-xl shadow-2xl md:w-2/3 h-2/3 justify-center  w-full  flex flex-col  items-center space-y-8 p-8 bg-gradient-to-br from-gray-800 to-gray-800">
         <AccountCircleIcon className="text-white" />
         <input type="text" className="border p-2  md:w-1/3 rounded-xl   " onChange={evt => setUsername(evt.target.value)} placeholder="Username" />
         <input type="password" className="border p-2 md:w-1/3  rounded-xl " onChange={evt => setPassword(evt.target.value)} placeholder="password" />
