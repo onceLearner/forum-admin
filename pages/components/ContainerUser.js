@@ -8,26 +8,26 @@ import CardUser from './user/CardUser';
 
 
 const ContainerUser = ({ users }) => {
-    const [list, setList] = useState([])
+    const [list, setList] = useState(users)
     const [listInitial, setListInitial] = useState(users)
     const [loading, setLoading] = useState(true)
     const [SearchValue, setSearchValue] = useState("");
 
 
 
-    useEffect(() => {
-        axios.get("https://webrtc-back1.herokuapp.com/user/etudiant/all")
-            .then(res => {
-                setList(res.data);
-                setListInitial(res.data)
-                setLoading(false);
-                console.log(res.data)
-            })
+    // useEffect(() => {
+    //     axios.get("https://webrtc-back1.herokuapp.com/user/etudiant/all")
+    //         .then(res => {
+    //             setList(res.data);
+    //             setListInitial(res.data)
+    //             setLoading(false);
+    //             console.log(res.data)
+    //         })
 
-        return () => {
+    //     return () => {
 
-        }
-    }, [])
+    //     }
+    // }, [])
 
 
     useEffect(() => {

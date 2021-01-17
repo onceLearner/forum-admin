@@ -9,26 +9,26 @@ import EntModal from './entreprise/EntModal';
 
 
 const ContainerEntr = ({ entreprises }) => {
-    const [list, setList] = useState([])
+    const [list, setList] = useState(entreprises)
     const [listInitial, setListInitial] = useState(entreprises)
     const [loading, setLoading] = useState(true)
     const [SearchValue, setSearchValue] = useState("");
     const [modal, setModal] = useState(false)
 
 
-    useEffect(() => {
-        axios.get("https://webrtc-back1.herokuapp.com/entreprise/entreprises")
-            .then(res => {
-                setList(res.data);
-                setListInitial(res.data)
-                setLoading(false);
-                console.log(res.data)
-            })
+    // useEffect(() => {
+    //     axios.get("https://webrtc-back1.herokuapp.com/entreprise/entreprises")
+    //         .then(res => {
+    //             setList(res.data);
+    //             setListInitial(res.data)
+    //             setLoading(false);
+    //             console.log(res.data)
+    //         })
 
-        return () => {
+    //     return () => {
 
-        }
-    }, [])
+    //     }
+    // }, [])
 
 
     useEffect(() => {

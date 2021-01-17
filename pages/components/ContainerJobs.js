@@ -9,26 +9,26 @@ import CardJob from './job/CardJob';
 import JobModal from './job/JobModal';
 
 const ContainerJobs = ({ jobs }) => {
-    const [list, setList] = useState([])
+    const [list, setList] = useState(jobs)
     const [listInitial, setListInitial] = useState(jobs)
     const [loading, setLoading] = useState(true)
     const [SearchValue, setSearchValue] = useState("");
     const [modal, setModal] = useState(false);
 
 
-    useEffect(() => {
-        axios.get("https://webrtc-back1.herokuapp.com/job/jobs")
-            .then(res => {
-                setList(res.data);
-                setListInitial(res.data)
-                setLoading(false);
-                console.log(res.data)
-            })
+    // useEffect(() => {
+    //     axios.get("https://webrtc-back1.herokuapp.com/job/jobs")
+    //         .then(res => {
+    //             setList(res.data);
+    //             setListInitial(res.data)
+    //             setLoading(false);
+    //             console.log(res.data)
+    //         })
 
-        return () => {
+    //     return () => {
 
-        }
-    }, [])
+    //     }
+    // }, [])
 
 
     useEffect(() => {
