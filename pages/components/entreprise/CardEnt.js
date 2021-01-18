@@ -81,7 +81,7 @@ export async function getStaticProps() {
     // You can use any data fetching library
     const res = await fetch('https://webrtc-back1.herokuapp.com/entreprise/entreprises')
     const entreprise1 = await res.json()
-    const entereprise = entreprise1[0];
+    const entreprise = entreprise1[0];
 
     // By returning { props: posts }, the Blog component
     // will receive `posts` as a prop at build time
