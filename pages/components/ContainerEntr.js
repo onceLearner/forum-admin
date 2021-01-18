@@ -6,11 +6,14 @@ import Header from './Header'
 import CardEnt from './entreprise/CardEnt';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import EntModal from './entreprise/EntModal';
+import useSWR from "swr"
 
 
-const ContainerEntr = ({ entreprises }) => {
-    const [list, setList] = useState(entreprises)
-    const [listInitial, setListInitial] = useState(entreprises)
+const fetcher = url => fetch(url).then(res => res.json());
+
+const ContainerEntr = () => {
+    const [list, setList] = useState([])
+    const [listInitial, setListInitial] = useState([])
     const [loading, setLoading] = useState(true)
     const [SearchValue, setSearchValue] = useState("");
     const [modal, setModal] = useState(false)
@@ -40,6 +43,15 @@ const ContainerEntr = ({ entreprises }) => {
     }, [SearchValue])
 
 
+    const { data, error } = useSWR('https://webrtc-back1.herokuapp.com/entreprise/entreprises', fetcher, { refreshInterval: 2000 })
+
+
+    if (!data) return (
+        <div className={` grid place-items-center h-screen w-screen `}>
+            <TrackChangesIcon style={{ fontSize: "60px" }} className=" text-gray-200  animate-spin" />
+        </div>)
+
+
 
 
     return (
@@ -58,12 +70,10 @@ const ContainerEntr = ({ entreprises }) => {
                 </div>
                 {modal && <EntModal modal={setModal} />}
 
-                <div className={!loading ? `hidden` : ` flex items-center justify-center h-screen `}>
-                    <TrackChangesIcon style={{ fontSize: "60px" }} className=" text-gray-200  animate-spin" />
-                </div>
+
 
                 <div className="flex flex-wrap justify-evenly  gap-8">
-                    {list.map(entreprise => {
+                    {data.map(entreprise => {
                         return (
                             <CardEnt entreprise={entreprise} key={entreprise.id_entreprise} />
                         )
@@ -76,17 +86,22 @@ const ContainerEntr = ({ entreprises }) => {
         </div>
     )
 }
-export async function getStaticProps() {
-    const res = await fetch("https://webrtc-back1.herokuapp.com/entreprise/entreprises")
-    const entreprises = await res.json()
 
-    return {
-        props: {
-            entreprises,
-        },
-        revalidate: 1,
-    }
-}
+
+// export async function getStaticPropss() {
+//     let entreprises = [];
+//     axios.get("https://webrtc-back1.herokuapp.com/entreprise/entreprises")
+//         .then(res => {
+//             entreprises = res.data
+
+//         })
+//     return {
+//         props: {
+//             entreprises,
+//         },
+//         revalidate: 1,
+//     }
+// }
 
 
 export default ContainerEntr

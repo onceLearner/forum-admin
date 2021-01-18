@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import useSWR from "swr"
+
 import axios from "axios"
 import TrackChangesIcon from '@material-ui/icons/TrackChanges';
 import SearchIcon from '@material-ui/icons/Search';
@@ -7,11 +9,16 @@ import CardUser from './user/CardUser';
 
 
 
-const ContainerUser = ({ users }) => {
-    const [list, setList] = useState(users)
-    const [listInitial, setListInitial] = useState(users)
-    const [loading, setLoading] = useState(true)
+const ContainerUser = () => {
+    const [list, setList] = useState([])
+    const [listInitial, setListInitial] = useState([])
+    const [loading, setLoading] = useState(false)
     const [SearchValue, setSearchValue] = useState("");
+
+    const fetcher = url => fetch(url).then(res => res.json());
+
+
+
 
 
 
@@ -38,6 +45,13 @@ const ContainerUser = ({ users }) => {
         }
     }, [SearchValue])
 
+    const { data, error } = useSWR('https://webrtc-back1.herokuapp.com/user/etudiant/all', fetcher, { refreshInterval: 2000 })
+
+    if (!data) return (
+        <div className={` grid place-items-center h-screen w-screen `}>
+            <TrackChangesIcon style={{ fontSize: "60px" }} className=" text-gray-200  animate-spin" />
+        </div>)
+
 
 
 
@@ -60,7 +74,7 @@ const ContainerUser = ({ users }) => {
                 </div>
 
                 <div className="flex flex-wrap justify-evenly  gap-8">
-                    {list.map(user => {
+                    {data.map(user => {
                         return (
                             <CardUser user={user} key={user.username} />
                         )
@@ -73,17 +87,17 @@ const ContainerUser = ({ users }) => {
         </div>
     )
 }
-export async function getStaticProps() {
-    const res = await fetch("https://webrtc-back1.herokuapp.com/user/etudiant/all")
-    const users = await res.json()
+// export async function getStaticProps() {
+//     const res = await fetch("https://webrtc-back1.herokuapp.com/user/etudiant/all")
+//     const users = await res.json()
 
-    return {
-        props: {
-            users,
-        },
-        revalidate: 1,
-    }
-}
+//     return {
+//         props: {
+//             users,
+//         },
+//         revalidate: 1,
+//     }
+// }
 
 
 export default ContainerUser

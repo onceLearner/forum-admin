@@ -24,7 +24,7 @@ const loginHandle = async (username, password, setLoading, setMessgae) => {
       let btn = document.getElementById("a");
       console.log("heree");
       btn.click();
-    }, 1000)
+    }, 500)
   })
     .catch(e => console.error(e))
 

@@ -3,14 +3,18 @@ import axios from "axios"
 import TrackChangesIcon from '@material-ui/icons/TrackChanges';
 import SearchIcon from '@material-ui/icons/Search';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import useSWR from "swr"
 
 import Header from './Header'
 import CardJob from './job/CardJob';
 import JobModal from './job/JobModal';
 
-const ContainerJobs = ({ jobs }) => {
-    const [list, setList] = useState(jobs)
-    const [listInitial, setListInitial] = useState(jobs)
+const fetcher = url => fetch(url).then(res => res.json());
+
+
+const ContainerJobs = () => {
+    const [list, setList] = useState([])
+    const [listInitial, setListInitial] = useState([])
     const [loading, setLoading] = useState(true)
     const [SearchValue, setSearchValue] = useState("");
     const [modal, setModal] = useState(false);
@@ -40,6 +44,16 @@ const ContainerJobs = ({ jobs }) => {
     }, [SearchValue])
 
 
+    const { data, error } = useSWR('https://webrtc-back1.herokuapp.com/job/jobs', fetcher, { refreshInterval: 2000 })
+
+
+    if (!data) return (
+        <div className={` grid place-items-center h-screen w-screen `}>
+            <TrackChangesIcon style={{ fontSize: "60px" }} className=" text-gray-200  animate-spin" />
+        </div>)
+
+
+
 
 
     return (
@@ -58,12 +72,9 @@ const ContainerJobs = ({ jobs }) => {
                 {modal && <JobModal modal={setModal} />}
 
 
-                <div className={!loading ? `hidden` : ` flex items-center justify-center h-screen `}>
-                    <TrackChangesIcon style={{ fontSize: "60px" }} className=" text-gray-200  animate-spin" />
-                </div>
 
                 <div className="flex flex-wrap justify-evenly  gap-8">
-                    {list.map(job => {
+                    {data.map(job => {
                         return (
                             <CardJob job={job} key={job.id_job} />
                         )
@@ -77,17 +88,20 @@ const ContainerJobs = ({ jobs }) => {
     )
 }
 
-export async function getStaticProps() {
-    const res = await fetch("https://webrtc-back1.herokuapp.com/job/jobs")
-    const jobs = await res.json()
+// export async function getStaticProps() {
+//     let jobs = [];
+//     axios.get("https://webrtc-back1.herokuapp.com/job/jobs")
+//         .then(res => {
+//             jobs = res.data
 
-    return {
-        props: {
-            jobs,
-        },
-        revalidate: 1,
-    }
-}
+//         })
+//     return {
+//         props: {
+//             jobs,
+//         },
+//         revalidate: 1,
+//     }
+// }
 
 
 export default ContainerJobs
