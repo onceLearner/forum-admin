@@ -17,7 +17,7 @@ const Container = () => {
 
 
     const handleUpdate = (url, desc) => {
-        axios.post("https://webrtc-back1.herokuapp.com//entreprise/show/update", {
+        axios.post("https://webrtc-back1.herokuapp.com/entreprise/show/update", {
             show_url: url,
             description: desc
         })
@@ -32,7 +32,7 @@ const Container = () => {
 
     useEffect(() => {
 
-        axios.get("https://webrtc-back1.herokuapp.com//entreprise/show/shows").then(res => {
+        axios.get("https://webrtc-back1.herokuapp.com/entreprise/show/shows").then(res => {
             setShowUrlfixed(res.data[0].url_show)
             setDescriptionfixed(res.data[0].description)
         }
