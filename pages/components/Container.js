@@ -18,7 +18,7 @@ const Container = () => {
 
     const handleUpdate = (url, desc) => {
         axios.post("https://webrtc-back1.herokuapp.com/entreprise/show/update", {
-            show_url: url,
+            url_show: url,
             description: desc
         })
             .then(res => {
