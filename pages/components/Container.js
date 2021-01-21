@@ -17,11 +17,16 @@ const Container = () => {
 
 
     const handleUpdate = (url, desc) => {
+        console.log({
+            url_show: url,
+            description: desc
+        })
         axios.post("https://webrtc-back1.herokuapp.com/entreprise/show/update", {
             url_show: url,
             description: desc
         })
             .then(res => {
+
                 if (res.data) {
                     setDescriptionfixed(desc);
                     setShowUrlfixed(url);
