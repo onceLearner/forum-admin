@@ -79,9 +79,18 @@ const CardEnt = ({ entreprise }) => {
 export async function getStaticProps() {
     // Call an external API endpoint to get posts.
     // You can use any data fetching library
-    const res = await fetch('https://webrtc-back1.herokuapp.com/entreprise/entreprises')
-    const entreprise1 = await res.json()
-    const entreprise = entreprise1[0];
+    // const res = await fetch('https://webrtc-back1.herokuapp.com/entreprise/entreprises')
+    const res = {
+        id_entreprise: "atos",
+        username_admin: "atos",
+        title_entreprise: null,
+        domaine: "service ",
+        code_conf: "1",
+        interests: "ingenieurie",
+        description: "lorem ipsem loke  akjhfklja khjalkj lkjlkahjlkfha"
+    }
+    // const entreprise1 = await res.json()
+    const entreprise = res
 
     // By returning { props: posts }, the Blog component
     // will receive `posts` as a prop at build time
